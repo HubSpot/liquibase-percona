@@ -34,8 +34,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <liquibase.version>3.3.0</liquibase.version>
-        <mysql.version>5.1.32</mysql.version>
+        <liquibase.version>3.4.2</liquibase.version>
+        <mysql.version>5.1.38</mysql.version>
 
         <config_host>127.0.0.1</config_host>
         <config_port>3306</config_port>
@@ -120,7 +120,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.2</version>
+                <version>3.6</version>
                 <executions>
                     <execution>
                         <id>pmd</id>
