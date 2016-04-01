@@ -13,6 +13,14 @@ package liquibase.ext.percona;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import liquibase.database.Database;
+import liquibase.exception.UnexpectedLiquibaseException;
+import liquibase.logging.LogFactory;
+import liquibase.logging.Logger;
+import liquibase.sql.Sql;
+import liquibase.statement.core.RuntimeStatement;
+import liquibase.util.StreamUtil;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FilterOutputStream;
 import java.io.IOException;
@@ -21,14 +29,6 @@ import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-
-import liquibase.database.Database;
-import liquibase.exception.UnexpectedLiquibaseException;
-import liquibase.logging.LogFactory;
-import liquibase.logging.Logger;
-import liquibase.sql.Sql;
-import liquibase.statement.core.RuntimeStatement;
-import liquibase.util.StreamUtil;
 
 /**
  * Statement to run {@code pt-online-schema-change} in order
@@ -60,7 +60,7 @@ public class PTOnlineSchemaChangeStatement extends RuntimeStatement {
         commands.add("--alter=" + alterStatement);
         commands.add("--alter-foreign-keys-method=auto");
 
-        if (database.getConnection() != null) {
+    if (database.getConnection() != null) {
             DatabaseConnectionUtil connection = new DatabaseConnectionUtil(database.getConnection());
             commands.add("--host=" + connection.getHost());
             commands.add("--port=" + connection.getPort());

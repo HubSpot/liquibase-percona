@@ -19,8 +19,8 @@
     <scm>
         <connection>scm:git:http://github.com/adangel/liquibase-percona.git</connection>
         <url>https://github.com/adangel/liquibase-percona</url>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
 
     <developers>
         <developer>

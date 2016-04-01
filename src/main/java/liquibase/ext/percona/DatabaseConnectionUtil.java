@@ -13,16 +13,16 @@ package liquibase.ext.percona;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import liquibase.database.DatabaseConnection;
+import liquibase.database.jvm.JdbcConnection;
+import liquibase.logging.LogFactory;
+import liquibase.logging.Logger;
+
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import liquibase.database.DatabaseConnection;
-import liquibase.database.jvm.JdbcConnection;
-import liquibase.logging.LogFactory;
-import liquibase.logging.Logger;
 
 /**
  * Wraps a {@link DatabaseConnection} to have easy access
@@ -69,6 +69,9 @@ public class DatabaseConnectionUtil {
         if (connection instanceof JdbcConnection) {
             Connection jdbcCon = ((JdbcConnection) connection).getWrappedConnection();
             try {
+                if (jdbcCon.isWrapperFor(Connection.class)) {
+                    jdbcCon = jdbcCon.unwrap(Connection.class);
+                }
                 // for MySQL, jdbcCon would be JDBC4Connection and superclass
                 // would be ConnectionImpl
                 Field propsField = jdbcCon.getClass().getSuperclass().getDeclaredField("props");
